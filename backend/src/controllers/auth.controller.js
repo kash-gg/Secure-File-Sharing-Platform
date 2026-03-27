@@ -4,7 +4,7 @@ const { registerUser, loginUser } = require("../services/auth.service")
 const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
+  sameSite: "none",
   maxAge: 60 * 60 * 1000 // 1 hour (matches JWT expiry)
 }
 
@@ -60,7 +60,7 @@ const logout = async (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict"
+    sameSite: "none"
   })
 
   res.status(200).json({ message: "Logged out successfully" })
